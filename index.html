@@ -19,6 +19,31 @@ section.more{padding:32px 0}.heading{text-align:center;margin-bottom:22px}.headi
 footer{text-align:center;padding:30px 0 42px;color:#9c7890;font-size:.9rem}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,120px);background:#60364f;color:white;padding:12px 18px;border-radius:99px;z-index:10;transition:transform .3s;text-align:center;max-width:90%;width:max-content}.toast.show{transform:translate(-50%,0)}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.note{display:grid;grid-template-columns:50px 1fr;column-gap:12px}.note .emoji{grid-row:span 2}.note h3{margin:2px 0 5px}.hero{min-height:auto}.pill{font-size:.75rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+/* Guided story flow */
+.story-step{display:none;animation:stepIn .65s cubic-bezier(.2,.75,.25,1) both}
+.story-step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.step-dots{display:flex;justify-content:center;gap:8px;margin:0 0 22px}
+.step-dot{width:9px;height:9px;border-radius:50%;background:#f4c5dc;transition:all .25s}
+.step-dot.active{width:28px;border-radius:99px;background:var(--deep)}
+.story-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:24px}
+.story-panel{width:min(720px,100%);margin:24px auto;text-align:center;padding:clamp(24px,5vw,42px);border-radius:30px;background:linear-gradient(135deg,#ffe4f0,#eee6ff);border:1px solid white;box-shadow:var(--shadow)}
+.story-panel h2{font-size:clamp(1.7rem,5vw,2.5rem);margin:10px 0}
+.story-panel p{line-height:1.85}
+.story-emoji{font-size:clamp(3.5rem,12vw,5.5rem);animation:bob 2s ease-in-out infinite;display:inline-block}
+.love-letter-card{width:min(740px,100%);margin:auto;background:#fffdfd;border:2px dashed #ffb6d5;border-radius:27px;padding:clamp(22px,5vw,40px);box-shadow:var(--shadow);text-align:left}
+.love-letter-card p{line-height:1.95;color:#79566f}
+.final-screen{display:none;position:relative;overflow:hidden}
+.final-screen.active{display:block}
+.final-screen .final-emoji{font-size:5rem;animation:pulse 1.1s infinite;display:block}
+.final-screen.yes{background:linear-gradient(135deg,#ffe0ee,#fff8fc 55%,#e9e0ff)}
+.final-screen.time{background:linear-gradient(135deg,#fff0d9,#fff8fc 55%,#ffe4f0)}
+.confetti-heart{position:fixed;z-index:20;top:-35px;pointer-events:none;animation:confettiFall 3.4s ease-in forwards}
+@keyframes confettiFall{to{transform:translateY(115vh) rotate(520deg);opacity:0}}
+.btn:disabled{opacity:.65;cursor:wait;transform:none}
+@media(max-width:700px){.story-panel{padding:24px 18px}}
+
 </style>
 </head>
 <body>
@@ -33,14 +58,56 @@ footer{text-align:center;padding:30px 0 42px;color:#9c7890;font-size:.9rem}.toas
 <article class="note"><div class="emoji">🌸</div><h3>Kindness, daily</h3><p>Small thoughtful moments can make an ordinary day feel special.</p></article>
 <article class="note"><div class="emoji">🫶</div><h3>Respect, forever</h3><p>Listening, understanding, and respecting each other matter most.</p></article>
 </div></section>
-<section class="more" id="letterSection"><div class="heading"><h2>A letter for Sadaf 💌</h2><p>From Yasir, with a whole lot of heart.</p></div><div class="letter"><h2>Dear Sadaf,</h2>
-<p>Maybe I won't always find the perfect words, but I want you to know that your smile makes my day brighter. I'm happy I got the courage to tell you how I feel, and even happier that we get to begin this little story together. ❤️</p>
-<p>I hope we keep choosing honesty, patience, laughter, and respect. I want us to talk openly, support each other, and make beautiful memories one small moment at a time. No pressure to be perfect — just two people learning to understand and care for each other.</p><p>Thank you for being part of this happy moment. Here's to more smiles, sweet conversations, and a story we write together. 🌷</p><div class="sign">Yours, Yasir ♡</div></div></section>
-<section class="more" id="proposalSection"><div class="heading"><h2>One little question 💝</h2><p>Your answer matters, so choose whatever feels right to you.</p></div>
-<div class="proposal"><div class="big">💌</div><h2>Sadaf, shall we make more beautiful memories together? 🥹</h2><p>I'd love to keep getting to know you with honesty, kindness, and respect.</p>
-<div class="btnrow"><button class="btn primary" id="acceptBtn">Yes, Yasir ❤️</button><button class="btn secondary" id="declineBtn">I need more time 🌷</button></div>
-<div class="notice">If you choose an answer, it will be saved so Yasir can see it in his private admin panel. You can choose “I need more time” too — your choice will be respected.</div><div class="status" id="responseStatus" role="status" aria-live="polite"></div></div></section>
-</main><footer>Made by<span style="color:#df4389"></span> Yasir </footer></div><div class="toast" id="toast" role="status"></div>
+
+<section class="more" id="storyFlow">
+  <div class="story-panel">
+    <div class="step-dots" aria-label="Story progress">
+      <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span>
+    </div>
+    <div class="story-step active" id="step1">
+      <span class="story-emoji">💌</span>
+      <h2>A little letter, just for you, Sadaf</h2>
+      <p>Some feelings deserve more than a quick message. I made this tiny page to tell you what is in my heart. 🌷</p>
+      <div class="story-actions"><button class="btn primary" id="startLetter">Open your letter 💗</button></div>
+    </div>
+    <div class="story-step" id="step2">
+      <span class="story-emoji">🐻💞🐰</span>
+      <h2>Dear Sadaf,</h2>
+      <div class="love-letter-card">
+        <p>Maybe I won't always find the perfect words, but your smile makes my day brighter. I'm happy I found the courage to tell you how I feel. ❤️</p>
+        <p>I hope we keep choosing honesty, patience, laughter, and respect. I'd love for us to keep talking, understand each other better, and make beautiful memories one small moment at a time.</p>
+        <p>Thank you for being part of this happy moment. Here's to more smiles, sweet conversations, and a story we write together. 🌷</p>
+        <p class="sign">Yours, Yasir ♡</p>
+      </div>
+      <div class="story-actions"><button class="btn secondary" id="backToStart">← Read later</button><button class="btn primary" id="nextQuestion">Continue to my question 💝</button></div>
+    </div>
+    <div class="story-step" id="step3">
+      <span class="story-emoji">💖</span>
+      <h2>One little question</h2>
+      <p>Sadaf, shall we make more beautiful memories together? 🥹</p>
+      <p>I'd love to keep getting to know you with honesty, kindness, and respect. Choose what feels right for you.</p>
+      <div class="story-actions"><button class="btn primary" id="acceptBtn">Yes, Yasir ❤️</button><button class="btn secondary" id="declineBtn">I need more time 🌷</button></div>
+      <div class="notice">Your answer will be saved so Yasir can see it in his private admin panel. Either answer will be respected. ♡</div>
+    </div>
+    <div class="story-step final-screen yes" id="yesScreen">
+      <span class="final-emoji">🥹💖</span>
+      <h2>Yay! You made Yasir smile! 🌸</h2>
+      <p>Thank you for saying yes, Sadaf. Here's to sweet conversations, little adventures, and memories made with honesty, kindness, and respect.</p>
+      <p><strong>One beautiful story begins with one little yes. 💌</strong></p>
+      <p id="yesSaveStatus" class="small">Saving your answer…</p>
+      <div class="story-actions"><button class="btn secondary" id="replayYes">Read our little story again ↺</button></div>
+    </div>
+    <div class="story-step final-screen time" id="timeScreen">
+      <span class="final-emoji">🌷💛</span>
+      <h2>That's okay, Sadaf.</h2>
+      <p>Thank you for being honest with me. There's no pressure and no deadline — take the time you need. Your comfort and choice matter to me.</p>
+      <p>Whenever you're ready to talk, I'll listen with kindness. 💌</p>
+      <p id="timeSaveStatus" class="small">Saving your answer…</p>
+      <div class="story-actions"><button class="btn secondary" id="replayTime">Back to the question ↺</button></div>
+    </div>
+  </div>
+</section>
+</main><footer>Made with <span style="color:#df4389">♥</span> for Yasir &amp; Sadaf<br>One sweet moment at a time.</footer></div><div class="toast" id="toast" role="status"></div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -49,6 +116,7 @@ import { getDatabase, ref, set, serverTimestamp } from "https://www.gstatic.com/
 const firebaseConfig = {
   apiKey: "AIzaSyDOEjuvjt6p5C2MwS-hYFF8DfqzJynOo7E",
   authDomain: "yasir-sadaf-love.firebaseapp.com",
+  databaseURL: "https://yasir-sadaf-love-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "yasir-sadaf-love",
   storageBucket: "yasir-sadaf-love.firebasestorage.app",
   messagingSenderId: "320395678761",
@@ -58,26 +126,42 @@ const configured = !Object.values(firebaseConfig).some(v => v.includes("PASTE_YO
 let db = null;
 if (configured) { const app = initializeApp(firebaseConfig); db = getDatabase(app); }
 
+
 const layer=document.getElementById("floatLayer"), toast=document.getElementById("toast");
 let toastTimer;
 function heart(){const el=document.createElement("span");el.className="heart";el.textContent=["♡","♥","💗","💕","✨"][Math.floor(Math.random()*5)];el.style.left=Math.random()*100+"%";el.style.fontSize=(14+Math.random()*22)+"px";el.style.animationDuration=(7+Math.random()*7)+"s";layer.appendChild(el);setTimeout(()=>el.remove(),15000)}
-for(let i=0;i<14;i++)setTimeout(heart,i*300);setInterval(heart,900);
+for(let i=0;i<12;i++)setTimeout(heart,i*300);setInterval(heart,1100);
 function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2800)}
 function burst(){for(let i=0;i<28;i++)setTimeout(heart,i*55)}
-document.getElementById("openLetter").onclick=()=>{document.getElementById("letterSection").scrollIntoView({behavior:"smooth"});showToast("A letter, written with love 💌");burst()};
-document.getElementById("goProposal").onclick=()=>document.getElementById("proposalSection").scrollIntoView({behavior:"smooth"});
+function confetti(){const items=["💗","💖","💕","🌸","✨","💌"];for(let i=0;i<32;i++){const el=document.createElement("span");el.className="confetti-heart";el.textContent=items[Math.floor(Math.random()*items.length)];el.style.left=Math.random()*100+"vw";el.style.fontSize=(18+Math.random()*20)+"px";el.style.animationDelay=(Math.random()*.8)+"s";document.body.appendChild(el);setTimeout(()=>el.remove(),4500)}}
+const steps=["step1","step2","step3","yesScreen","timeScreen"];
+function showStep(id){steps.forEach(s=>document.getElementById(s).classList.toggle("active",s===id));const dots=document.querySelectorAll(".step-dot");dots.forEach((d,i)=>d.classList.toggle("active",i===(id==="step1"?0:id==="step2"?1:2)));document.getElementById("storyFlow").scrollIntoView({behavior:"smooth",block:"center"})}
+document.getElementById("openLetter").onclick=()=>{showStep("step1");showToast("A little story made just for you 💌");burst()};
+document.getElementById("goProposal").onclick=()=>showStep("step3");
+document.getElementById("startLetter").onclick=()=>{showStep("step2");burst()};
+document.getElementById("backToStart").onclick=()=>showStep("step1");
+document.getElementById("nextQuestion").onclick=()=>showStep("step3");
+document.getElementById("replayYes").onclick=()=>showStep("step1");
+document.getElementById("replayTime").onclick=()=>showStep("step3");
 async function saveAnswer(answer){
- const box=document.getElementById("responseStatus");
- const btns=[document.getElementById("acceptBtn"),document.getElementById("declineBtn")];btns.forEach(b=>b.disabled=true);
- if(!db){box.classList.add("show");box.innerHTML="💗 Thanks for choosing. The website owner still needs to finish the Firebase setup before answers can be sent to the admin panel. You can tell Yasir directly for now.";btns.forEach(b=>b.disabled=false);showToast("Firebase setup is not finished yet");return}
+ const yes=answer==="accepted";
+ const status=document.getElementById(yes?"yesSaveStatus":"timeSaveStatus");
+ const btns=[document.getElementById("acceptBtn"),document.getElementById("declineBtn")];
+ btns.forEach(b=>b.disabled=true);
+ showStep(yes?"yesScreen":"timeScreen");
+ if(!db){status.textContent="The animation works, but Firebase config still needs to be completed before Yasir can see this answer in the admin panel.";btns.forEach(b=>b.disabled=false);showToast("Firebase setup needs checking");if(yes)confetti();return}
  try{
    await set(ref(db,"proposalResponse"),{answer,updatedAt:serverTimestamp(),displayName:"Sadaf"});
-   box.classList.add("show");
-   box.textContent=answer==="accepted"?"Awww 💖 Your answer has been saved. Yasir can now see it in his admin panel.":"Thank you for being honest 🌷 Your answer has been saved, and your choice should be respected.";
-   showToast(answer==="accepted"?"Your answer has been sent 💖":"Your response has been sent 🌷");burst();
- }catch(e){box.classList.add("show");box.textContent="We couldn't save your answer. Please try again later or tell Yasir directly.";btns.forEach(b=>b.disabled=false);console.error(e)}
+   status.textContent=yes?"Your yes has been saved. Yasir can now see it in his admin panel. 💖":"Your answer has been saved. Yasir can see it in his admin panel. 🌷";
+   showToast(yes?"A little yes, a lot of happiness 💖":"Your answer was sent with care 🌷");
+   burst();if(yes)confetti();
+ }catch(e){
+   status.textContent="The message animation is shown, but we couldn't save the answer. Please tell Yasir directly or try again later.";
+   btns.forEach(b=>b.disabled=false);console.error("Could not save proposal response:",e);
+ }
 }
 document.getElementById("acceptBtn").onclick=()=>saveAnswer("accepted");
 document.getElementById("declineBtn").onclick=()=>saveAnswer("needs_more_time");
+
 </script>
 </body></html>
