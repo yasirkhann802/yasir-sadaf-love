@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff0f7"><title>Yasir ♡ Sadaf — A Little Love Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff70ad;--deep:#df4389;--ink:#603b55;--pale:#fff2f8;--shadow:0 18px 50px #c0568c22}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Nunito,system-ui,sans-serif;background:radial-gradient(circle at 8% 8%,#ffe0ee,transparent 28rem),radial-gradient(circle at 92% 25%,#e9e0ff,transparent 27rem),linear-gradient(#fff7fa,#fff1f7 55%,#fff9fc);overflow-x:hidden}
+.wrap{width:min(960px,92%);margin:auto;position:relative;z-index:1}.float-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}.heart{position:absolute;bottom:-35px;animation:floatUp linear forwards;opacity:.6}@keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:12px}.brand{font-weight:900}.brand span{color:var(--deep)}.pill{border:1px solid #ffd0e3;background:#ffffffbb;padding:8px 13px;border-radius:99px;font-size:.82rem;font-weight:900}
+.hero{min-height:75vh;display:grid;place-items:center;padding:30px 0 55px;text-align:center}.card{width:min(780px,100%);padding:clamp(24px,6vw,55px);background:#ffffffb8;border:1px solid white;border-radius:32px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.eyebrow{display:inline-block;background:#fff0f6;color:var(--deep);padding:8px 14px;border-radius:99px;font-size:.82rem;font-weight:900}h1{font-size:clamp(2.5rem,8vw,5rem);line-height:1.12;letter-spacing:-1px;margin:20px 0 12px}h1 span{display:block;font:400 clamp(2.3rem,7vw,4.5rem) Pacifico,cursive;color:var(--deep);letter-spacing:0}.sub{max-width:570px;margin:auto;line-height:1.8;color:#86617b}.characters{display:flex;justify-content:center;align-items:end;gap:15px;margin:25px auto}.character{font-size:clamp(4rem,14vw,7rem);animation:bob 2.3s ease-in-out infinite;filter:drop-shadow(0 8px 4px #eab0ca55)}.character:last-child{animation-delay:.4s}.heart-mid{font-size:2.2rem;margin-bottom:20px;animation:pulse 1s infinite}@keyframes bob{50%{transform:translateY(-12px) rotate(3deg)}}@keyframes pulse{50%{transform:scale(1.25)}}
+.btnrow{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:24px}.btn{border:0;border-radius:99px;padding:14px 22px;font:900 1rem Nunito,sans-serif;cursor:pointer;transition:transform .2s}.btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(135deg,#ff79b5,#ed4c91);color:white;box-shadow:0 10px 22px #ed4c9144}.secondary{background:white;color:var(--deep);border:1px solid #ffd1e4}.small{font-size:.83rem;color:#9b7890;margin-top:13px;line-height:1.6}
+section.more{padding:32px 0}.heading{text-align:center;margin-bottom:22px}.heading h2{font-size:clamp(1.8rem,5vw,2.7rem);margin:0 0 8px}.heading p{margin:0;color:#916d86}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.note{background:#ffffffd9;border:1px solid white;border-radius:23px;padding:22px;box-shadow:0 12px 35px #b96c9510}.note .emoji{font-size:2.2rem}.note h3{margin:10px 0 6px}.note p{line-height:1.7;color:#86657c;margin:0}
+.letter{width:min(740px,100%);margin:auto;background:#fffdfd;border:2px dashed #ffb6d5;border-radius:27px;padding:clamp(22px,5vw,40px);box-shadow:var(--shadow)}.letter h2{font:400 2rem Pacifico,cursive;color:var(--deep);margin:0 0 15px}.letter p{line-height:1.9;color:#79566f}.sign{text-align:right;font:1.4rem Pacifico,cursive;color:var(--deep)}
+.proposal{width:min(720px,100%);margin:auto;text-align:center;padding:clamp(24px,5vw,42px);border-radius:30px;background:linear-gradient(135deg,#ffe4f0,#eee6ff);border:1px solid white;box-shadow:var(--shadow)}.proposal .big{font-size:4rem}.proposal h2{font-size:clamp(1.7rem,5vw,2.5rem);margin:10px 0}.proposal p{line-height:1.8}.status{margin:18px auto 0;max-width:500px;background:#ffffffc9;border-radius:18px;padding:16px;line-height:1.8;display:none}.status.show{display:block}.notice{max-width:590px;margin:15px auto 0;font-size:.85rem;color:#8c6c82;line-height:1.6}
+footer{text-align:center;padding:30px 0 42px;color:#9c7890;font-size:.9rem}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,120px);background:#60364f;color:white;padding:12px 18px;border-radius:99px;z-index:10;transition:transform .3s;text-align:center;max-width:90%;width:max-content}.toast.show{transform:translate(-50%,0)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.note{display:grid;grid-template-columns:50px 1fr;column-gap:12px}.note .emoji{grid-row:span 2}.note h3{margin:2px 0 5px}.hero{min-height:auto}.pill{font-size:.75rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="float-layer" id="floatLayer" aria-hidden="true"></div><div class="wrap">
+<header><div class="brand">Yasir <span>♡</span> Sadaf</div><div class="pill">made with love ✨</div></header>
+<main>
+<section class="hero"><div class="card"><div class="eyebrow">💗 A tiny website, a big feeling</div><h1>My favorite <span>Yasir ♡ Sadaf</span></h1><p class="sub">Some people make ordinary days feel magical. This little corner is for our smiles, sweet conversations, and the beginning of something special. 🌷</p>
+<div class="characters"><span class="character">🐻</span><span class="heart-mid">💞</span><span class="character">🐰</span></div>
+<div class="btnrow"><button class="btn primary" id="openLetter">Open your love letter 💌</button><button class="btn secondary" id="goProposal">A special question 💗</button></div><p class="small">Made especially for Sadaf, with care and respect. ♡</p></div></section>
+<section class="more"><div class="heading"><h2>Little things, big feelings ✨</h2><p>A few promises for this sweet beginning.</p></div><div class="grid">
+<article class="note"><div class="emoji">🤝</div><h3>Trust, always</h3><p>Honesty and trust help a connection feel safe, strong, and real.</p></article>
+<article class="note"><div class="emoji">🌸</div><h3>Kindness, daily</h3><p>Small thoughtful moments can make an ordinary day feel special.</p></article>
+<article class="note"><div class="emoji">🫶</div><h3>Respect, forever</h3><p>Listening, understanding, and respecting each other matter most.</p></article>
+</div></section>
+<section class="more" id="letterSection"><div class="heading"><h2>A letter for Sadaf 💌</h2><p>From Yasir, with a whole lot of heart.</p></div><div class="letter"><h2>Dear Sadaf,</h2>
+<p>Maybe I won't always find the perfect words, but I want you to know that your smile makes my day brighter. I'm happy I got the courage to tell you how I feel, and even happier that we get to begin this little story together. ❤️</p>
+<p>I hope we keep choosing honesty, patience, laughter, and respect. I want us to talk openly, support each other, and make beautiful memories one small moment at a time. No pressure to be perfect — just two people learning to understand and care for each other.</p><p>Thank you for being part of this happy moment. Here's to more smiles, sweet conversations, and a story we write together. 🌷</p><div class="sign">Yours, Yasir ♡</div></div></section>
+<section class="more" id="proposalSection"><div class="heading"><h2>One little question 💝</h2><p>Your answer matters, so choose whatever feels right to you.</p></div>
+<div class="proposal"><div class="big">💌</div><h2>Sadaf, shall we make more beautiful memories together? 🥹</h2><p>I'd love to keep getting to know you with honesty, kindness, and respect.</p>
+<div class="btnrow"><button class="btn primary" id="acceptBtn">Yes, Yasir ❤️</button><button class="btn secondary" id="declineBtn">I need more time 🌷</button></div>
+<div class="notice">If you choose an answer, it will be saved so Yasir can see it in his private admin panel. You can choose “I need more time” too — your choice will be respected.</div><div class="status" id="responseStatus" role="status" aria-live="polite"></div></div></section>
+</main><footer>Made by<span style="color:#df4389"></span> Yasir </footer></div><div class="toast" id="toast" role="status"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+/* STEP: Replace the placeholder values below with your Firebase Web App config. */
+const firebaseConfig = {
+  apiKey: "AIzaSyDOEjuvjt6p5C2MwS-hYFF8DfqzJynOo7E",
+  authDomain: "yasir-sadaf-love.firebaseapp.com",
+  projectId: "yasir-sadaf-love",
+  storageBucket: "yasir-sadaf-love.firebasestorage.app",
+  messagingSenderId: "320395678761",
+  appId: "1:320395678761:web:5cb4b878469a93f16e3838"
+};
+const configured = !Object.values(firebaseConfig).some(v => v.includes("PASTE_YOUR"));
+let db = null;
+if (configured) { const app = initializeApp(firebaseConfig); db = getDatabase(app); }
+
+const layer=document.getElementById("floatLayer"), toast=document.getElementById("toast");
+let toastTimer;
+function heart(){const el=document.createElement("span");el.className="heart";el.textContent=["♡","♥","💗","💕","✨"][Math.floor(Math.random()*5)];el.style.left=Math.random()*100+"%";el.style.fontSize=(14+Math.random()*22)+"px";el.style.animationDuration=(7+Math.random()*7)+"s";layer.appendChild(el);setTimeout(()=>el.remove(),15000)}
+for(let i=0;i<14;i++)setTimeout(heart,i*300);setInterval(heart,900);
+function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2800)}
+function burst(){for(let i=0;i<28;i++)setTimeout(heart,i*55)}
+document.getElementById("openLetter").onclick=()=>{document.getElementById("letterSection").scrollIntoView({behavior:"smooth"});showToast("A letter, written with love 💌");burst()};
+document.getElementById("goProposal").onclick=()=>document.getElementById("proposalSection").scrollIntoView({behavior:"smooth"});
+async function saveAnswer(answer){
+ const box=document.getElementById("responseStatus");
+ const btns=[document.getElementById("acceptBtn"),document.getElementById("declineBtn")];btns.forEach(b=>b.disabled=true);
+ if(!db){box.classList.add("show");box.innerHTML="💗 Thanks for choosing. The website owner still needs to finish the Firebase setup before answers can be sent to the admin panel. You can tell Yasir directly for now.";btns.forEach(b=>b.disabled=false);showToast("Firebase setup is not finished yet");return}
+ try{
+   await set(ref(db,"proposalResponse"),{answer,updatedAt:serverTimestamp(),displayName:"Sadaf"});
+   box.classList.add("show");
+   box.textContent=answer==="accepted"?"Awww 💖 Your answer has been saved. Yasir can now see it in his admin panel.":"Thank you for being honest 🌷 Your answer has been saved, and your choice should be respected.";
+   showToast(answer==="accepted"?"Your answer has been sent 💖":"Your response has been sent 🌷");burst();
+ }catch(e){box.classList.add("show");box.textContent="We couldn't save your answer. Please try again later or tell Yasir directly.";btns.forEach(b=>b.disabled=false);console.error(e)}
+}
+document.getElementById("acceptBtn").onclick=()=>saveAnswer("accepted");
+document.getElementById("declineBtn").onclick=()=>saveAnswer("needs_more_time");
+</script>
+</body></html>
